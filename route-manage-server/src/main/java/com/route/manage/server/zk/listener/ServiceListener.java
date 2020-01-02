@@ -52,6 +52,11 @@ public class ServiceListener implements PathChildrenCacheListener {
         }
       case CHILD_UPDATED:
       case CHILD_REMOVED:
+        String removePath = event.getData().getPath();
+        String removeService = AddressUtils.parseService(removePath);
+        ServiceConfig removeConfig = ServiceConfig.builder().name(removeService).build();
+        //移除节点
+        serverManager.removeService(removeConfig);
       default:
         return;
     }

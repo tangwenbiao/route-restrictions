@@ -25,12 +25,13 @@ public class ServerManagerTest {
   private ServerManager serverManager;
 
   @Test
-  public void testRootNode() {
-    Map<ServiceConfig, List<ProviderConfig>> providerMap = serverManager.getProviderMap();
-    System.out.println();
+  public void testRootNode() throws InterruptedException {
+    while (true) {
+      Map<ServiceConfig, List<ProviderConfig>> providerMap = serverManager.getProviderMap();
+      System.out.println();
+      Thread.sleep(10000L);
+    }
   }
-
-
 
 
 }

@@ -37,6 +37,12 @@ public class ProviderListener implements PathChildrenCacheListener {
         break;
       case CHILD_UPDATED:
       case CHILD_REMOVED:
+        String removePath = event.getData().getPath();
+        String removeServiceName = AddressUtils.parseService(removePath);
+        ProviderConfig removeProvider = AddressUtils.parseProvider(removePath, removeServiceName);
+        ServiceConfig removeService = ServiceConfig.builder().name(removeServiceName).build();
+        //移除
+        serverManager.removeProvider(removeService, removeProvider);
       default:
         return;
     }
