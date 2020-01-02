@@ -3,6 +3,7 @@ package com.ruote.manage.server.test.core;
 import com.route.manage.server.ManagerServerApplication;
 import com.route.manage.server.core.ProviderConfig;
 import com.route.manage.server.core.ServerManager;
+import com.route.manage.server.core.ServiceConfig;
 import java.util.List;
 import java.util.Map;
 import org.junit.Test;
@@ -25,9 +26,11 @@ public class ServerManagerTest {
 
   @Test
   public void testRootNode() {
-    Map<String, List<ProviderConfig>> providerMap = serverManager.getProviderMap();
+    Map<ServiceConfig, List<ProviderConfig>> providerMap = serverManager.getProviderMap();
     System.out.println();
   }
+
+
 
 
 }

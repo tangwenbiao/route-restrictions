@@ -3,6 +3,7 @@ package com.route.manage.server.zk.listener;
 import com.route.manage.server.core.ProviderConfig;
 import com.route.manage.server.core.ServerManager;
 import com.route.manage.server.core.ServiceConfig;
+import com.route.manage.server.utils.AddressUtils;
 import java.util.List;
 import java.util.Map;
 import org.apache.curator.framework.CuratorFramework;
@@ -27,7 +28,13 @@ public class ProviderListener implements PathChildrenCacheListener {
       PathChildrenCacheEvent event) throws Exception {
     switch (event.getType()) {
       case CHILD_ADDED:
-
+        String path = event.getData().getPath();
+        String service = AddressUtils.parseService(path);
+        ProviderConfig providerConfig = AddressUtils.parseProvider(path, service);
+        ServiceConfig serviceConfig = ServiceConfig.builder().name(service).build();
+        //添加节点
+        serverManager.addProvider(serviceConfig, providerConfig);
+        break;
       case CHILD_UPDATED:
       case CHILD_REMOVED:
       default:

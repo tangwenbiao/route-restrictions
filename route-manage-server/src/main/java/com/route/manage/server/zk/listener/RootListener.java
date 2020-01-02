@@ -5,6 +5,7 @@ import com.route.manage.server.core.ProviderConfig;
 import com.route.manage.server.core.ServerManager;
 import com.route.manage.server.core.ServiceConfig;
 import com.route.manage.server.utils.AddressUtils;
+import com.route.manage.server.utils.BuildPathUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +46,7 @@ public class RootListener implements PathChildrenCacheListener {
         serverManager.addService(addServiceConfig);
         //建立Provider的监听
         PathChildrenCache pathChildrenCache = new PathChildrenCache(curatorFramework,
-            RouteManageConstants.ZK_SOFA_SERVER_PREFIX + addName, true);
+            BuildPathUtils.buildRoot(addName), true);
         pathChildrenCache.getListenable().addListener(serviceListener);
         pathChildrenCache.start();
         break;

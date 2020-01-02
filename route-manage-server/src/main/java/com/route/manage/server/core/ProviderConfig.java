@@ -1,6 +1,9 @@
 package com.route.manage.server.core;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author: TangFenQi
@@ -8,6 +11,9 @@ import lombok.Data;
  * @date：2019/12/31 16:54
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ProviderConfig {
 
   private String ip;

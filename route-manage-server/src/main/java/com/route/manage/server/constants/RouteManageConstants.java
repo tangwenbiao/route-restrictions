@@ -7,6 +7,8 @@ package com.route.manage.server.constants;
  */
 public class RouteManageConstants {
 
+  public static String ROUTE_OPEN_KEY = "route.restrictions.open";
+
   public static String SOFA_ZK_ADDRESS = "sofa.zookeeper.address";
 
   public static String ZK_SEPARATOR = "/";
@@ -15,8 +17,8 @@ public class RouteManageConstants {
 
   public static String ZK_SOFA_SERVER_PREFIX = ZK_SEPARATOR + ZK_SOFA_ROOT + ZK_SEPARATOR;
 
-  public static String ZK_SOFA_SERVER_PROVIDER="providers";
+  public static String ZK_SOFA_SERVER_PROVIDER = "providers";
 
-  public static String ZK_SOFA_SERVER_CONSUMER="consumers";
+  public static String ZK_SOFA_SERVER_CONSUMER = "consumers";
 
 }

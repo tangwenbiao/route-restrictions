@@ -46,16 +46,31 @@ public class ServerManager implements ApplicationListener {
   }
 
   /**
+   * 根据服务信息 返回提供者信息集合
+   *
+   * @param serviceConfig 服务信息
+   * @return 提供者信息
+   */
+  public List<ProviderConfig> get(ServiceConfig serviceConfig) {
+    List<ProviderConfig> providerConfigList = new ArrayList<>();
+    for (Entry<ServiceConfig, List<ProviderConfig>> entry : providerMap.entrySet()) {
+      if (entry.getKey().getName().equals(serviceConfig.getName())) {
+        return entry.getValue();
+      }
+    }
+    return providerConfigList;
+  }
+
+  /**
    * 添加服务信息
    */
   public void addService(ServiceConfig serviceConfig) {
     for (Entry<ServiceConfig, List<ProviderConfig>> entry : providerMap.entrySet()) {
       if (entry.getKey().getName().equals(serviceConfig.getName())) {
         return;
-      } else {
-        providerMap.put(serviceConfig, new ArrayList<>());
       }
     }
+    providerMap.put(serviceConfig, new ArrayList<>());
   }
 
   /**
@@ -79,12 +94,12 @@ public class ServerManager implements ApplicationListener {
     for (Entry<ServiceConfig, List<ProviderConfig>> entry : providerMap.entrySet()) {
       if (entry.getKey().getName().equals(serviceConfig.getName())) {
         addProvider(entry.getValue(), providerConfig);
-      } else {
-        List<ProviderConfig> providerConfigList = new ArrayList<>();
-        providerConfigList.add(providerConfig);
-        providerMap.put(serviceConfig, providerConfigList);
+        return;
       }
     }
+    List<ProviderConfig> providerConfigList = new ArrayList<>();
+    providerConfigList.add(providerConfig);
+    providerMap.put(serviceConfig, providerConfigList);
   }
 
   private void addProvider(List<ProviderConfig> value, ProviderConfig providerConfig) {

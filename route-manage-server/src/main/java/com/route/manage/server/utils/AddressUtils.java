@@ -1,8 +1,13 @@
 package com.route.manage.server.utils;
 
 import com.route.manage.server.constants.RouteManageConstants;
+import com.route.manage.server.core.ProviderConfig;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Assert;
@@ -50,8 +55,13 @@ public class AddressUtils {
     int prefix = (RouteManageConstants.ZK_SEPARATOR + RouteManageConstants.ZK_SOFA_ROOT
         + RouteManageConstants.ZK_SEPARATOR).length();
     String substring = path.substring(prefix);
+    if (substring.contains("/")) {
+      substring = substring.substring(0, substring.indexOf("/"));
+    }
     return substring;
   }
+
+  private static String URL_SEPARATOR = "://";
 
   /**
    * 解析路径中服务信息
@@ -60,7 +70,7 @@ public class AddressUtils {
    * @param serviceName 服务名称
    * @return 服务加入者类型
    */
-  public static String parseProvider(String path, String serviceName) {
+  public static ProviderConfig parseProvider(String path, String serviceName) {
     if (StringUtils.isEmpty(path) || StringUtils.isEmpty(serviceName)) {
       log.warn("path or service name is empty!");
     }
@@ -68,7 +78,22 @@ public class AddressUtils {
         RouteManageConstants.ZK_SOFA_SERVER_PREFIX + serviceName + RouteManageConstants.ZK_SEPARATOR
             + RouteManageConstants.ZK_SOFA_SERVER_PROVIDER + RouteManageConstants.ZK_SEPARATOR;
     String substring = path.substring(prefix.length());
-    URLEncoder encoder=
+    //解码
+    String url;
+    try {
+      url = URLDecoder.decode(substring, "UTF-8");
+    } catch (UnsupportedEncodingException e) {
+      log.error("parse url of provider is err! ex:", e);
+      throw new IllegalArgumentException("解析服务提供者url失败!");
+    }
+    //解析
+    url = url.substring(url.indexOf(URL_SEPARATOR) + URL_SEPARATOR.length());
+    String ip = url.substring(0, url.indexOf(":"));
+    int port = Integer.parseInt(url.substring(url.indexOf(":") + 1, url.indexOf("?")));
+    ProviderConfig providerConfig = new ProviderConfig();
+    providerConfig.setIp(ip);
+    providerConfig.setPort(port);
+    return providerConfig;
   }
 
 }
