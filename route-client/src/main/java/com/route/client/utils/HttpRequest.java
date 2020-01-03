@@ -1,5 +1,6 @@
 package com.route.client.utils;
 
+import com.route.client.core.ClientConstants;
 import lombok.Data;
 
 /**
@@ -14,4 +15,8 @@ public class HttpRequest {
   private Integer readTimeOut;
   private Integer connectTimeOut;
 
+  public HttpRequest() {
+    readTimeOut = ClientConstants.DEFAULT_READ_TIME;
+    connectTimeOut = ClientConstants.DEFAULT_CONNECTOR_TIME;
+  }
 }
