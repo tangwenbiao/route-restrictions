@@ -1,14 +1,12 @@
-package com.sofa.client.core.rule;
+package com.route.client.rule;
 
 import com.alipay.sofa.rpc.client.ProviderInfo;
-import com.ctrip.framework.apollo.spring.annotation.ApolloJsonValue;
-import com.sofa.client.core.ShieldingConfig;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 /**
  * @author: TangFenQi

@@ -1,4 +1,4 @@
-package com.sofa.client.core.rule;
+package com.route.client.rule;
 
 /**
  * @author: TangFenQi

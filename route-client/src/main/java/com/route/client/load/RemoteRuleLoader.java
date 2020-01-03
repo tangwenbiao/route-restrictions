@@ -1,7 +1,6 @@
-package com.sofa.client.core.load;
+package com.route.client.load;
 
-import com.sofa.client.core.RuleManager;
-import java.net.HttpURLConnection;
+import com.route.client.core.RuleManager;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;

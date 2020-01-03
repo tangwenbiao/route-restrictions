@@ -1,11 +1,9 @@
-package com.sofa.client.core.rule;
+package com.route.client.rule;
 
 import com.alipay.sofa.rpc.client.ProviderInfo;
-import java.security.Provider;
 import java.util.HashSet;
 import java.util.List;
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.util.CollectionUtils;
 
 /**

@@ -118,6 +118,9 @@ public class ServerManager implements ApplicationListener {
   public void removeProvider(ServiceConfig serviceConfig, ProviderConfig providerConfig) {
     for (Entry<ServiceConfig, List<ProviderConfig>> entry : providerMap.entrySet()) {
       if (entry.getKey().getName().equals(serviceConfig.getName())) {
+        if (entry.getValue() == null) {
+          return;
+        }
         for (ProviderConfig config : entry.getValue()) {
           if (config.getPort() == providerConfig.getPort() && config.getIp()
               .equals(providerConfig.getIp())) {

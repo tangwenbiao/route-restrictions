@@ -1,4 +1,4 @@
-package com.sofa.client.router;
+package com.route.client.router;
 
 /**
  * @author: TangFenQi

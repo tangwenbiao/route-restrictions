@@ -1,14 +1,12 @@
-package com.sofa.client.test;
+package com.route.client.test;
 
 import com.google.gson.reflect.TypeToken;
-import com.sofa.client.ClientApplication;
-import com.sofa.client.core.rule.IPRuleInfo;
-import com.sofa.client.core.utils.HttpRequest;
-import com.sofa.client.core.utils.HttpResponse;
-import com.sofa.client.core.utils.HttpUtils;
+import com.route.client.rule.IPRuleInfo;
+import com.route.client.utils.HttpRequest;
+import com.route.client.utils.HttpResponse;
+import com.route.client.utils.HttpUtils;
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.function.Function;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,7 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @date：2020/1/2 17:13
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = ClientApplication.class)
+@SpringBootTest(classes = TestApplication.class)
 public class HttpClientTest {
 
   @Test

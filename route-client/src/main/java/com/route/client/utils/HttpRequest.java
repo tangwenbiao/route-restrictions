@@ -1,4 +1,4 @@
-package com.sofa.client.core.utils;
+package com.route.client.utils;
 
 import lombok.Data;
 

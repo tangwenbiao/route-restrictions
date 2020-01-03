@@ -1,4 +1,4 @@
-package com.sofa.client.core.utils;
+package com.route.client.utils;
 
 import com.google.common.io.CharStreams;
 import com.google.gson.Gson;
@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.util.function.Function;
 
 /**
@@ -32,7 +32,8 @@ public class HttpUtils {
   private static <T> HttpResponse<T> get(HttpRequest request, Function<String, T> function) {
     HttpURLConnection urlConnection;
     InputStreamReader inputStreamReader = null;
-    int responseCode;
+    int responseCode = 0;
+    String responseBody = null;
     try {
       urlConnection = (HttpURLConnection) new URL(request.getUrl())
           .openConnection();
@@ -46,24 +47,25 @@ public class HttpUtils {
 
       urlConnection.connect();
       responseCode = urlConnection.getResponseCode();
-      String responseBody;
+
       inputStreamReader = new InputStreamReader(urlConnection.getInputStream(),
-          "UTF-8");
+          StandardCharsets.UTF_8);
       responseBody = CharStreams.toString(inputStreamReader);
-      return new HttpResponse(function.apply(responseBody), responseCode);
     } catch (IOException e) {
-      e.printStackTrace();
+      throw new RuntimeException("access to the server failed! url:{}" + request.getUrl(), e);
     } finally {
       if (inputStreamReader != null) {
         try {
           inputStreamReader.close();
         } catch (IOException e) {
-          e.printStackTrace();
         }
-        ;
+      }
+      if (responseCode == 200) {
+        return new HttpResponse(responseBody, responseCode);
       }
     }
-    return null;
+    throw new RuntimeException(
+        "the response code is err! code:" + responseCode + "body:" + responseBody);
   }
 
 }

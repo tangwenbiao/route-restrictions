@@ -1,7 +1,7 @@
-package com.sofa.client.core;
+package com.route.client.core;
 
-import com.sofa.client.core.rule.AbstractRuleInfo;
-import com.sofa.client.core.rule.RuleType;
+import com.route.client.rule.AbstractRuleInfo;
+import com.route.client.rule.RuleType;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
