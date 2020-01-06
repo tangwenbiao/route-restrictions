@@ -17,6 +17,12 @@
   <dependencies>
 
     <dependency>
+      <groupId>route-restrictions</groupId>
+      <artifactId>route-client</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
       <artifactId>sofa-server</artifactId>
       <groupId>route-restrictions</groupId>
       <version>1.0-SNAPSHOT</version>

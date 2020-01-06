@@ -11,7 +11,7 @@ import com.route.client.core.ClientConstants;
 public class URLBuilder {
 
   public static String buildQueryAll(ClientConfig clientConfig) {
-    String stringBuffer = clientConfig.getAddress()
+    String stringBuffer = "http://"+clientConfig.getAddress()
         + ClientConstants.QUERY_ALL_URL;
     return stringBuffer;
   }

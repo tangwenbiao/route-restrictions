@@ -2,6 +2,7 @@ package com.route.client.load;
 
 import com.google.gson.reflect.TypeToken;
 import com.route.client.core.ClientConfig;
+import com.route.client.core.RuleManager;
 import com.route.client.rule.IPRuleInfo;
 import com.route.client.utils.HttpRequest;
 import com.route.client.utils.HttpResponse;
@@ -18,8 +19,11 @@ public class RemoteRepositoryResolver {
 
   private ClientConfig clientConfig;
 
-  public RemoteRepositoryResolver(ClientConfig clientConfig) {
+  public RuleManager ruleManager;
+
+  public RemoteRepositoryResolver(ClientConfig clientConfig, RuleManager ruleManager) {
     this.clientConfig = clientConfig;
+    this.ruleManager = ruleManager;
   }
 
   public void sync() {
@@ -32,6 +36,7 @@ public class RemoteRepositoryResolver {
         .get(httpRequest, new TypeToken<List<IPRuleInfo>>() {
         }.getType());
     //写入本地
+    ruleManager.update(response.getBody());
 
   }
 

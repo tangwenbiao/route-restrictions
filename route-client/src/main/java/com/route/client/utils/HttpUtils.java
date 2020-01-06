@@ -61,7 +61,7 @@ public class HttpUtils {
         }
       }
       if (responseCode == 200) {
-        return new HttpResponse(responseBody, responseCode);
+        return new HttpResponse(function.apply(responseBody), responseCode);
       }
     }
     throw new RuntimeException(

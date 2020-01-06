@@ -17,4 +17,6 @@ public class ClientConstants {
 
   public static final String QUERY_ALL_URL = QUERY_ROOT_URL + "/getAll";
 
+  public static final String ROUTE_CONTROL_ADDRESS="route.control.address";
+
 }

@@ -1,9 +1,13 @@
 package com.route.client.load;
 
+import com.route.client.core.ClientConfig;
 import com.route.client.core.RuleManager;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.TimeUnit;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author: TangFenQi
@@ -12,17 +16,23 @@ import java.util.concurrent.ThreadFactory;
  */
 public class RemoteRuleLoader implements RuleLoader {
 
-  private ExecutorService executorService;
+  private ScheduledExecutorService executorService;
 
   private ThreadFactory threadFactory;
 
   private RuleManager ruleManager;
 
-  public RemoteRuleLoader() {
+  private RemoteRepositoryResolver remoteRepositoryResolver;
+
+  public RemoteRuleLoader(RuleManager ruleManager, ClientConfig clientConfig) {
+    this.ruleManager = ruleManager;
     threadFactory = RouteThreadFactory.create("rule", true);
-    executorService = Executors.newSingleThreadExecutor(threadFactory);
+    executorService = Executors.newScheduledThreadPool(1, threadFactory);
+    remoteRepositoryResolver = new RemoteRepositoryResolver(clientConfig, ruleManager);
     //加载
     load();
+    //定时轮询
+    executorService.schedule(() -> remoteRepositoryResolver.sync(), 5, TimeUnit.SECONDS);
   }
 
   /**
@@ -30,9 +40,9 @@ public class RemoteRuleLoader implements RuleLoader {
    */
   @Override
   public void load() {
-
+    remoteRepositoryResolver.sync();
   }
 
-  private void poll(){
+  private void poll() {
   }
 }
